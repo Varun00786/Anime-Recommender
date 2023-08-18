@@ -31,7 +31,7 @@ def fetch_poster(movie_id):
     except Exception as e:
         return str("Something went/n Wrong")
 
-@st.cache_data
+
 def recommend(movie):
     index = df[df['English name'] == movie].index[0]
     sim_scores = list(enumerate(cosine_similarity(tfidf_matrix,tfidf_matrix[index])))
