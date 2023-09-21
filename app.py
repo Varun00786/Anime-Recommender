@@ -3,6 +3,7 @@ from streamlit import *
 import streamlit as st 
 import requests
 import joblib
+from streamlit_option_menu import option_menu
 df=joblib.load('dfanime')
 tfidf_matrix=joblib.load('animev')
 from sklearn.metrics.pairwise import  cosine_similarity
@@ -44,7 +45,11 @@ def recommend(movie):
         recommended_movie_names.append(df.iloc[i[0]]['English name'])
 
     return recommended_movie_names,recommended_movie_posters
-menu_choice = st.sidebar.radio("Select an option", ("Home", "About"))
+# menu_choice = st.sidebar.radio("Select an option", ("Home", "About"))
+with st.sidebar:
+    menu_choice = option_menu(options=["Home", "About"],
+                         menu_title="Select an option",
+                         default_index=0,menu_icon="list",icons=["house-fill","journal"])
 
 if menu_choice == "Home":
     
